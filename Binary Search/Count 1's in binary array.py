@@ -10,7 +10,7 @@ def Binary_Search(n,arr,x):
         mid = low + (high - low)//2
         if arr[mid] == x:
             counter+=1
-            arr.pop(mid)  #can also use remove in this place
+            arr.remove(mid)  #can also use remove in this place
         elif arr[mid] < x:
             high = mid - 1
     return counter
