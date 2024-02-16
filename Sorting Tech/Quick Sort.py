@@ -1,20 +1,38 @@
-def partition(array,start,end):
-    potential_index_for_pivot = start
-    pivot = array[end]
-    for j in range(start,end-1):
-        if array[j] <= pivot :
-            array[potential_index_for_pivot],array[j] = array[j],array[potential_index_for_pivot]
+# You need to return the sorted array
+# arr: input array
+# start: starting index of array
+# end: end index of array
+
+
+def partition(arr,start,end):
+    pivot = arr[end]
+    potential_index_for_pivot = start - 1
+
+    for j in range(start,end):
+        if arr[j] < pivot:
             potential_index_for_pivot += 1
-    array[potential_index_for_pivot],array[end] = array[end],array[potential_index_for_pivot]
-    # print(array)
-    return potential_index_for_pivot
+            arr[potential_index_for_pivot],arr[j] = arr[j],arr[potential_index_for_pivot]
+    
+    arr[potential_index_for_pivot+1],arr[end] = arr[end],arr[potential_index_for_pivot+1]
 
-def Quick_sort(given_list,start,end):
-    partition_index = partition(given_list,0,len(given_list)-1)
-    Quick_sort(given_list,0,partition_index)
-    Quick_sort(given_list,partition_index,end)
+    return potential_index_for_pivot + 1
 
 
-given_list = [12,9,7,15,10]
-Quick_sort(given_list,0,len(given_list)-1)
-print(given_list)
+
+
+def quick_sort(array, low, high):     
+    if low < high:
+        pivot = partition(array,low,high)
+        quick_sort(array,low,pivot-1)
+        quick_sort(array,pivot+1,high)
+
+    return array
+
+T = int(input())
+while T> 0:
+    T-= 1
+    array = list(map(int,input().split()))
+    low = 0
+    high = len(array)-1
+    print(quick_sort(array,low,high))
+
